@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Announcement } from './announcement';
-import { Category } from './category';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +7,5 @@ import { Category } from './category';
 })
 export class AppComponent {
 
-
-  ngOnInit(): void {
-    
-  }
-
- 
-
+  ngOnInit(): void { }
 }

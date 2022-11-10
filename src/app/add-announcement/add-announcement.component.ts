@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
 import { Announcement } from '../announcement';
 import { Category } from '../category';
 import { AnnouncementService } from '../services/announcement.service';
@@ -31,14 +30,13 @@ export class AddAnnouncementComponent implements OnInit {
   constructor(private service: AnnouncementService) {
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   addAnnouncement(): void {
 
-    if(this.titleFormControl.invalid || this.authorFormControl.invalid || this.messageFormControl.invalid ||
-       this.imageURLFormControl.invalid || this.categoryFormControl.invalid)
-       return;
+    if (this.titleFormControl.invalid || this.authorFormControl.invalid || this.messageFormControl.invalid ||
+      this.imageURLFormControl.invalid || this.categoryFormControl.invalid)
+      return;
 
     const announcement: Announcement = {
       title: this.newTitle,

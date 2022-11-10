@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AnnouncementService } from '../services/announcement.service';
 
 @Component({
   selector: 'app-home',
@@ -10,9 +9,7 @@ export class HomeComponent implements OnInit {
 
   selectedCategory: string = "";
 
-  constructor(private announcementService: AnnouncementService) {
-
-  }
+  constructor() { }
 
   ngOnInit(): void {
   }

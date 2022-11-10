@@ -9,7 +9,7 @@ import { Category } from '../category';
 export class CategoriesComponent implements OnInit {
 
   @Output() emitSelectedCategory = new EventEmitter<string>();
- 
+
   categories: string[] = Object.values(Category);
 
   constructor() { }

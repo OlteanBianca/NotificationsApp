@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Announcement } from '../announcement';
-import { Category } from '../category';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +13,9 @@ export class AnnouncementService {
 
   constructor(private httpClient: HttpClient) { }
 
-
   readonly httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type':  'application/json',
+      'Content-Type': 'application/json',
     })
   };
 
@@ -26,7 +24,7 @@ export class AnnouncementService {
     return this.httpClient.get<Announcement[]>(this.baseUrl, this.httpOptions);
   }
 
-  getAnnouncementById(id: string): Observable<Announcement>{
+  getAnnouncementById(id: string): Observable<Announcement> {
     return this.httpClient.get<Announcement>(this.baseUrl + '/{' + id + '}', this.httpOptions);
   }
 

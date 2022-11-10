@@ -11,5 +11,4 @@ export class ToolsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

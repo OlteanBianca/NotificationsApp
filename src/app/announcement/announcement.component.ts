@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { map, switchMap } from 'rxjs';
+import { switchMap } from 'rxjs';
 import { Announcement } from '../announcement';
-import { Category } from '../category';
 import { AnnouncementService } from '../services/announcement.service';
 
 @Component({
@@ -35,7 +34,7 @@ export class AnnouncementComponent implements OnInit {
   }
 
   deleteAnnouncement(id: string) {
-    this.service.deleteAnnouncement(id).pipe(switchMap(anns=> this.service.getAnnouncements()
+    this.service.deleteAnnouncement(id).pipe(switchMap(anns => this.service.getAnnouncements()
     )).subscribe();
   }
 
