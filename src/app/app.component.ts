@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Announcement } from './announcement';
+import { Category } from './category';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'notifications-app';
+
+
+  ngOnInit(): void {
+    
+  }
+
+ 
+
 }

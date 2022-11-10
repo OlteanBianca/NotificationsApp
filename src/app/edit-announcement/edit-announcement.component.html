@@ -1,0 +1,66 @@
+<div class="content">
+    <h1> Edit announcement </h1>
+    <form class="form"> 
+
+        <!-- Title -->
+        <mat-form-field>
+            <mat-label>Title</mat-label>
+            <input name="inputTitle" matInput [formControl]="titleFormControl" [(ngModel)]="announcementToEdit.title"
+                placeholder="Enter your title" />
+
+            <mat-error *ngIf="titleFormControl.hasError('required')">Title is required.</mat-error>
+            <mat-error *ngIf="titleFormControl.hasError('minlength')">Title needs to be minimum 4 characters.</mat-error>
+        </mat-form-field>
+        <br>
+
+        <!-- Author -->
+        <mat-form-field>
+            <mat-label>Author</mat-label>
+            <input name="inputAuthor" matInput [(ngModel)]="announcementToEdit.author" placeholder="Enter your author"
+                [formControl]="authorFormControl" />
+
+            <mat-error *ngIf="authorFormControl.hasError('required')">Author is required.</mat-error>
+            <mat-error *ngIf="authorFormControl.hasError('minlength')">Author needs to be minimum 4 characters.</mat-error>
+        </mat-form-field>
+        <br>
+
+        <!-- Message  -->
+        <mat-form-field>
+            <mat-label>Message</mat-label>
+            <input name="inputMessage" matInput [(ngModel)]="announcementToEdit.message" placeholder="Enter your message"
+                [formControl]="messageFormControl" />
+
+            <mat-error *ngIf="messageFormControl.hasError('required')">Message is required.</mat-error>
+            <mat-error *ngIf="messageFormControl.hasError('minlength')">Message needs to be minimum 4 characters.</mat-error>
+        </mat-form-field>
+        <br>
+
+        <!-- ImageURL -->
+        <mat-form-field>
+            <mat-label>ImageURL</mat-label>
+            <input name="inputImageURL" matInput [(ngModel)]="announcementToEdit.imageUrl" placeholder="Enter your imageURL"
+                [formControl]="imageURLFormControl" />
+
+            <mat-error *ngIf="imageURLFormControl.hasError('required')">ImageURL is required.</mat-error>
+            <mat-error *ngIf="imageURLFormControl.hasError('minlength')">ImageURL needs to be minimum 4 characters.</mat-error>
+        </mat-form-field>
+        <br>
+
+        <!-- Category --> 
+        <mat-form-field>
+            <mat-label>Choose </mat-label>
+            <mat-select matNativeControl [formControl]="categoryFormControl" [(ngModel)]="announcementToEdit.category"
+                style="width: 180px; font-size: 16px;">
+                <mat-option *ngFor="let category of categories" [value]=category> {{category}} </mat-option>
+            </mat-select>
+             <mat-error *ngIf="categoryFormControl.hasError('required')">Please choose an option.</mat-error> 
+        </mat-form-field>
+
+    </form>
+    <br>
+
+    <div class="button">
+        <button routerLink="home" mat-raised-button color="primary">Cancel</button>
+        <button routerLink="home" (click)="saveAnnouncement()" mat-raised-button color="primary">Save</button>
+    </div>
+</div>

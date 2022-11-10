@@ -1,0 +1,54 @@
+.announcements {
+    display: flex;
+    flex-direction: row;
+
+    .mat-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        height: 300px;
+        border: 2px solid #FFCACA;
+        border-radius: 25px;
+        padding: 30px;
+        background-color: rgb(182, 134, 205);
+
+        .mat-card-title {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .mat-card-subtitle {
+            align-self: flex-start;
+            font-weight: 600;
+        }
+
+        .mat-card-content {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            max-width: 200px;
+            max-height: 300px;
+
+            .img{
+                object-fit: cover;
+                width: 100px;
+                height: 100px;
+            }
+
+            .delete-button{
+                position: absolute;
+                right: 5px;
+                bottom: 10px;
+            }
+            .edit-button {
+                position: absolute;
+                right: 30px;
+                bottom: 10px;
+            }
+        }
+
+       
+    }
+}
