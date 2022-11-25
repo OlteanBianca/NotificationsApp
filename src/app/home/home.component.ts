@@ -7,14 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  selectedCategory: string = "";
+  selectedCategoryId: string = "";
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  receiveCategory(category: string) {
-    this.selectedCategory = category;
+  receiveCategory(id: string) {
+    this.selectedCategoryId = id;
   }
 }

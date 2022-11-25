@@ -1,5 +1,4 @@
-export enum Category {
-    General = 'General',
-    Course = 'Course',
-    Laboratory = 'Laboratory',
+export interface Category {
+    Name: string,
+    Id: string
 }

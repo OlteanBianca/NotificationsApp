@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Announcement } from '../announcement';
 import { Category } from '../category';
 import { AnnouncementService } from '../services/announcement.service';
+import { CategoryService } from '../services/category.service';
 
 @Component({
   selector: 'app-edit-announcement',
@@ -17,24 +18,25 @@ export class EditAnnouncementComponent implements OnInit {
   authorFormControl = new FormControl('', [Validators.required, Validators.minLength(4)]);
   messageFormControl = new FormControl('', [Validators.required, Validators.minLength(4)]);
   imageURLFormControl = new FormControl('', [Validators.required, Validators.minLength(4)]);
-  //, Validators.pattern("([^\\s]+(\\.(?i)(jpe?g|png|gif|bmp))$)")]);
-  categoryFormControl = new FormControl('', [Validators.required])
+  categoryFormControl = new FormControl('', [Validators.required]);
 
 
-  categories: Category[] = Object.values(Category);
+  categories!: Category[];
   announcementToEdit!: Announcement;
 
-  constructor(private service: AnnouncementService, private route: ActivatedRoute) { }
+  constructor(private aService: AnnouncementService, private route: ActivatedRoute, private cService: CategoryService) { }
 
 
   ngOnInit(): void {
+    this.categories = this.cService.getCategories();
+
     let id = this.route.snapshot.paramMap.get('id');
     if (id == null) return;
 
-    this.service.getAnnouncementById(id).subscribe((value: Announcement) => { this.announcementToEdit = value });
+    this.aService.getAnnouncementById(id).subscribe((value: Announcement) => { this.announcementToEdit = value });
   }
 
   saveAnnouncement() {
-    this.service.editAnnouncement(this.announcementToEdit).subscribe();
+    this.aService.editAnnouncement(this.announcementToEdit).subscribe();
   }
 }

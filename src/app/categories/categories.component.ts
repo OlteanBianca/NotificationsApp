@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Category } from '../category';
+import { CategoryService } from '../services/category.service';
 
 @Component({
   selector: 'app-categories',
@@ -10,11 +11,12 @@ export class CategoriesComponent implements OnInit {
 
   @Output() emitSelectedCategory = new EventEmitter<string>();
 
-  categories: string[] = Object.values(Category);
+  categories!: Category[] ;
 
-  constructor() { }
+  constructor(private service : CategoryService) { }
 
   ngOnInit(): void {
+    this.categories = this.service.getCategories();
   }
 
   selectCategory(category: string) {

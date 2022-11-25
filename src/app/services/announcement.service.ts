@@ -28,9 +28,9 @@ export class AnnouncementService {
     return this.httpClient.get<Announcement>(this.baseUrl + '/{' + id + '}', this.httpOptions);
   }
 
-  getFiltredAnnouncements(category: string): Observable<Announcement[]> {
+  getFiltredAnnouncements(categoryId: string): Observable<Announcement[]> {
     return this.httpClient.get<Announcement[]>(this.baseUrl, this.httpOptions).
-      pipe(map((announcements) => announcements.filter((value) => value.category === category)));
+      pipe(map((announcements) => announcements.filter((value) => value.category === categoryId)));
   }
 
   addAnnouncement(newAnnouncement: Announcement) {

@@ -3,6 +3,7 @@ import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/fo
 import { Announcement } from '../announcement';
 import { Category } from '../category';
 import { AnnouncementService } from '../services/announcement.service';
+import { CategoryService } from '../services/category.service';
 
 @Component({
   selector: 'app-add-announcement',
@@ -17,20 +18,21 @@ export class AddAnnouncementComponent implements OnInit {
   authorFormControl = new FormControl('', [Validators.required, Validators.minLength(4)]);
   messageFormControl = new FormControl('', [Validators.required, Validators.minLength(4)]);
   imageURLFormControl = new FormControl('', [Validators.required, Validators.minLength(4)]);
-  //, Validators.pattern("([^\\s]+(\\.(?i)(jpe?g|png|gif|bmp))$)" )]);
   categoryFormControl = new FormControl('', [Validators.required])
 
   newTitle: string = "";
   newAuthor: string = "";
   newMessage: string = "";
-  newCategory: Category = Category.General;
+  newCategory!: Category;
   newImageURL: string = "";
-  categories: Category[] = Object.values(Category);
+  categories!: Category[];
 
-  constructor(private service: AnnouncementService) {
+  constructor(private service: AnnouncementService, private categoryService: CategoryService) {
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.categories = this.categoryService.getCategories();
+   }
 
   addAnnouncement(): void {
 
@@ -43,7 +45,7 @@ export class AddAnnouncementComponent implements OnInit {
       author: this.newAuthor,
       message: this.newMessage,
       imageUrl: this.newImageURL,
-      category: this.newCategory,
+      category: this.newCategory.Id,
       id: '',
     }
     this.service.addAnnouncement(announcement).subscribe();

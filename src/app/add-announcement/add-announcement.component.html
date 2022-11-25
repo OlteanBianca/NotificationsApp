@@ -40,7 +40,7 @@
         <mat-form-field>
             <mat-label>ImageURL</mat-label>
             <input name="inputImageURL" matInput [(ngModel)]="newImageURL" placeholder="Enter your imageURL"
-                [formControl]="imageURLFormControl" />
+                [formControl]="imageURLFormControl"/>
 
             <mat-error *ngIf="imageURLFormControl.hasError('required')">ImageURL is required.</mat-error>
             <mat-error *ngIf="imageURLFormControl.hasError('minlength')">ImageURL needs to be minimum 4 characters.</mat-error>
@@ -52,7 +52,7 @@
             <mat-label>Choose </mat-label>
             <mat-select matNativeControl [formControl]="categoryFormControl" [(ngModel)]="newCategory"
                 style="width: 180px; font-size: 16px;">
-                <mat-option *ngFor="let category of categories" [value]=category> {{category}} </mat-option>
+                <mat-option *ngFor="let category of categories" [value]=category> {{category.Name}} </mat-option>
             </mat-select>
              <mat-error *ngIf="categoryFormControl.hasError('required')">Please choose an option.</mat-error> 
         </mat-form-field>

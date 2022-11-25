@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { switchMap } from 'rxjs';
 import { Announcement } from '../announcement';
 import { AnnouncementService } from '../services/announcement.service';
+import { CategoryService } from '../services/category.service';
 
 @Component({
   selector: 'app-announcement',
@@ -11,12 +12,12 @@ import { AnnouncementService } from '../services/announcement.service';
 
 export class AnnouncementComponent implements OnInit {
 
-  @Input() selectedCategory: string = 'All';
+  @Input() selectedCategoryId: string = '0';
 
 
   currentAnnouncements: Announcement[] = [];
 
-  constructor(private service: AnnouncementService) {
+  constructor(private service: AnnouncementService, private categoryService: CategoryService) {
   }
 
   ngOnInit(): void {
@@ -24,8 +25,8 @@ export class AnnouncementComponent implements OnInit {
   }
 
   ngOnChanges(): void {
-    if (this.selectedCategory != 'All' && this.selectedCategory != "") {
-      this.service.getFiltredAnnouncements(this.selectedCategory).
+    if (this.selectedCategoryId != '0' && this.selectedCategoryId != "") {
+      this.service.getFiltredAnnouncements(this.selectedCategoryId).
         subscribe((values: Announcement[]) => { this.currentAnnouncements = values })
     }
     else {
@@ -40,5 +41,9 @@ export class AnnouncementComponent implements OnInit {
 
   getAllAnnouncements() {
     this.service.getAnnouncements().subscribe((values: Announcement[]) => { this.currentAnnouncements = values });
+  }
+
+  getCategory(id: string){
+    return this.categoryService.getCategories().find(val => val.Id == id)
   }
 }
