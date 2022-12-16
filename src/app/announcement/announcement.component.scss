@@ -1,6 +1,7 @@
 .announcements {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 
     .mat-card {
         display: flex;
@@ -36,7 +37,6 @@
                 width: 100px;
                 height: 100px;
             }
-
             .delete-button{
                 position: absolute;
                 right: 5px;
@@ -48,7 +48,5 @@
                 bottom: 10px;
             }
         }
-
-       
     }
 }

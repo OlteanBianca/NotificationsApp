@@ -22,7 +22,8 @@ import { ToolsComponent } from './tools/tools.component';
 import { AuthorPipe } from './author.pipe';
 import { AnnouncementService } from './services/announcement.service';
 import { EditAnnouncementComponent } from './edit-announcement/edit-announcement.component';
-
+import { NotificationsService } from './services/notifications.service';
+import { CategoryService } from './services/category.service';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,8 @@ import { EditAnnouncementComponent } from './edit-announcement/edit-announcement
   ],
   providers: [
     AnnouncementService,
+    NotificationsService,
+    CategoryService,
     { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}
   ],
   bootstrap: [AppComponent]

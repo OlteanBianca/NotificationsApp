@@ -3,6 +3,7 @@ import { switchMap } from 'rxjs';
 import { Announcement } from '../announcement';
 import { AnnouncementService } from '../services/announcement.service';
 import { CategoryService } from '../services/category.service';
+import { NotificationsService } from '../services/notifications.service';
 
 @Component({
   selector: 'app-announcement',
@@ -13,11 +14,12 @@ import { CategoryService } from '../services/category.service';
 export class AnnouncementComponent implements OnInit {
 
   @Input() selectedCategoryId: string = '0';
-
-
+  
+  
   currentAnnouncements: Announcement[] = [];
 
-  constructor(private service: AnnouncementService, private categoryService: CategoryService) {
+  constructor(private service: AnnouncementService, 
+    private categoryService: CategoryService) {
   }
 
   ngOnInit(): void {
@@ -35,7 +37,7 @@ export class AnnouncementComponent implements OnInit {
   }
 
   deleteAnnouncement(id: string) {
-    this.service.deleteAnnouncement(id).pipe(switchMap(anns => this.service.getAnnouncements()
+    this.service.deleteAnnouncement(id).pipe(switchMap(() => this.service.getAnnouncements()
     )).subscribe();
   }
 
@@ -43,7 +45,7 @@ export class AnnouncementComponent implements OnInit {
     this.service.getAnnouncements().subscribe((values: Announcement[]) => { this.currentAnnouncements = values });
   }
 
-  getCategory(id: string){
-    return this.categoryService.getCategories().find(val => val.Id == id)
+  getCategoryName(id: string) {
+    return this.categoryService.getCategoryById(id)?.name;
   }
 }

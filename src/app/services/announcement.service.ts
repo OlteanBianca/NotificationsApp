@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Announcement } from '../announcement';
+import { Category } from '../category';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { Announcement } from '../announcement';
 
 export class AnnouncementService {
 
-  readonly baseUrl = "https://newsapi20221108120432.azurewebsites.net/api/Announcements";
+  readonly baseUrl = "https://localhost:44391/Announcement";
 
   constructor(private httpClient: HttpClient) { }
 
@@ -19,18 +20,16 @@ export class AnnouncementService {
     })
   };
 
-
   getAnnouncements(): Observable<Announcement[]> {
     return this.httpClient.get<Announcement[]>(this.baseUrl, this.httpOptions);
   }
-
+  
   getAnnouncementById(id: string): Observable<Announcement> {
-    return this.httpClient.get<Announcement>(this.baseUrl + '/{' + id + '}', this.httpOptions);
+    return this.httpClient.get<Announcement>(this.baseUrl + '/' + id, this.httpOptions);
   }
 
   getFiltredAnnouncements(categoryId: string): Observable<Announcement[]> {
-    return this.httpClient.get<Announcement[]>(this.baseUrl, this.httpOptions).
-      pipe(map((announcements) => announcements.filter((value) => value.category === categoryId)));
+    return this.httpClient.get<Announcement[]>(this.baseUrl + '/GetByCategoryId/' + categoryId, this.httpOptions);
   }
 
   addAnnouncement(newAnnouncement: Announcement) {
@@ -38,10 +37,14 @@ export class AnnouncementService {
   }
 
   editAnnouncement(announcement: Announcement) {
-    return this.httpClient.put<Announcement>(this.baseUrl + '/{' + announcement.id + '}', announcement, this.httpOptions);
+    return this.httpClient.put<Announcement>(this.baseUrl + '/' + announcement.id, announcement, this.httpOptions);
   }
 
   deleteAnnouncement(id: string) {
-    return this.httpClient.delete(this.baseUrl + '/{' + id + '}', this.httpOptions);
+    return this.httpClient.delete(this.baseUrl + '/' + id, this.httpOptions);
+  }
+
+  getCategories(): Observable<Category[]> {
+    return this.httpClient.get<Category[]>(this.baseUrl + '/Category/GetAll', this.httpOptions);
   }
 }

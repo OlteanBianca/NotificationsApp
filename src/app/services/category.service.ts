@@ -1,21 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Category } from '../category';
+import { AnnouncementService } from './announcement.service';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class CategoryService {
- 
-  categories:Category[] = [
-    {Name: 'All', Id: '0'},
-    {Name:'General', Id:'1'},
-    {Name:'Course', Id:'2'},
-    {Name:'Laboratory', Id:'3'}
-    ];
 
-  constructor() { }
+    categories!: Category[];
 
-  getCategories(){
-    return this.categories;
-  }
+    constructor(private service: AnnouncementService) { 
+      this.service.getCategories().subscribe((val: Category[]) => this.categories = val);
+    }
+
+    getCategoryById(id: string){
+      return this.categories.find(val => val.id === id);
+    }
+
+    getCategories(){
+      return this.categories;
+   }
 }

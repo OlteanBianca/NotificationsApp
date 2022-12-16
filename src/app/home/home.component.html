@@ -1,8 +1,10 @@
 <div class="home-container"> 
     <app-categories (emitSelectedCategory)="receiveCategory($event)"></app-categories>
-    
-    <div class="announcements">
-        <app-announcement [selectedCategoryId] = "selectedCategoryId"></app-announcement>      
+    <p>
+      {{notificationMessage}}
+    </p>    
+    <div class="container">    
+        <app-announcement class="announcements" [selectedCategoryId] = "selectedCategoryId"></app-announcement>      
         <app-tools></app-tools>
     </div>
 </div>

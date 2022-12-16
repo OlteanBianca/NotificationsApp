@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NotificationsService } from '../services/notifications.service';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +9,14 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   selectedCategoryId: string = "";
+  notificationMessage: string ="";
 
-  constructor() { }
+  constructor(private notificationService: NotificationsService) { }
 
   ngOnInit(): void {
+    this.notificationService.initWebSocket();
+    this.notificationService.notificationSubject.subscribe(hasNotifications => 
+      this.notificationMessage = hasNotifications ? "New notifications, please refresh the page" : "");
   }
 
   receiveCategory(id: string) {

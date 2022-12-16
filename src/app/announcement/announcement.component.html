@@ -1,4 +1,5 @@
 <div class="announcements">
+    
     <div *ngFor="let item of currentAnnouncements">
         <mat-card>
 
@@ -16,7 +17,7 @@
                     <p> {{item.message}} </p>
                 </div>
                 <div>
-                    <p> {{item.category}} </p>
+                    <p> {{getCategoryName(item.categoryId)}} </p>
                 </div>
 
                 <img mat-card-image src="assets/img/{{item.imageUrl}}">
@@ -25,7 +26,7 @@
                     <mat-icon>edit</mat-icon>
                 </button>
 
-                <button mat-icon-button class="delete-button" (click)="deleteAnnouncement(item.id)" >
+                <button mat-icon-button class="delete-button" (click)="deleteAnnouncement(item.id!)" >
                     <mat-icon>delete</mat-icon>
                 </button>  
             </mat-card-content>

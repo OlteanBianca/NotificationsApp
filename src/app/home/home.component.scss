@@ -1,11 +1,17 @@
 .home-container {
-    background-color:bisque;
-   
-    .announcements{
+    background-color:rgb(250, 228, 245);
+    padding-left: 100px;
+    padding-right: 100px;
+
+    .container{
+        justify-content: center;
+        align-content: center;
         display: flex;
         flex-direction: row;
-        justify-content: center;
-        width: 90;
-        background-color:bisque;
+        
+        .announcements{
+            display: flex;
+            flex-direction: row;      
+        }
     }
 }

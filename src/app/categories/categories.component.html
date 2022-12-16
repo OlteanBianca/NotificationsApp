@@ -1,6 +1,9 @@
 <div class="category-container">
+    <div class="category-div">
+        <button (click)="selectCategory('0')" mat-raised-button color="primary">All</button>
+    </div>
     <div class="category-div" *ngFor="let category of categories">
-        <button (click)="selectCategory(category.Id)" mat-raised-button color="primary">{{category.Name}}</button>
-    </div> 
-   
+        <button (click)="selectCategory(category.id)" mat-raised-button color="primary">{{category.name}}</button>
+    </div>
+
 </div>

@@ -4,6 +4,7 @@ import { Announcement } from '../announcement';
 import { Category } from '../category';
 import { AnnouncementService } from '../services/announcement.service';
 import { CategoryService } from '../services/category.service';
+import { NotificationsService } from '../services/notifications.service';
 
 @Component({
   selector: 'app-add-announcement',
@@ -27,11 +28,12 @@ export class AddAnnouncementComponent implements OnInit {
   newImageURL: string = "";
   categories!: Category[];
 
-  constructor(private service: AnnouncementService, private categoryService: CategoryService) {
-  }
+  constructor(private service: AnnouncementService, 
+              private categoryService: CategoryService,
+              private notificationService: NotificationsService) {}
 
   ngOnInit(): void {
-    this.categories = this.categoryService.getCategories();
+    this.categories  = this.categoryService.getCategories();
    }
 
   addAnnouncement(): void {
@@ -45,9 +47,9 @@ export class AddAnnouncementComponent implements OnInit {
       author: this.newAuthor,
       message: this.newMessage,
       imageUrl: this.newImageURL,
-      category: this.newCategory.Id,
-      id: '',
+      categoryId: this.newCategory.id,
     }
-    this.service.addAnnouncement(announcement).subscribe();
+
+    this.service.addAnnouncement(announcement).subscribe(r => this.notificationService.sendMessage("BroadcastMessage", [r]));
   }
 }

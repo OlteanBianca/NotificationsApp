@@ -22,6 +22,7 @@ export class EditAnnouncementComponent implements OnInit {
 
 
   categories!: Category[];
+  category!: Category;
   announcementToEdit!: Announcement;
 
   constructor(private aService: AnnouncementService, private route: ActivatedRoute, private cService: CategoryService) { }
@@ -33,10 +34,16 @@ export class EditAnnouncementComponent implements OnInit {
     let id = this.route.snapshot.paramMap.get('id');
     if (id == null) return;
 
+    this.getCategory(id);
     this.aService.getAnnouncementById(id).subscribe((value: Announcement) => { this.announcementToEdit = value });
   }
 
   saveAnnouncement() {
+    this.announcementToEdit.categoryId = this.category.id;
     this.aService.editAnnouncement(this.announcementToEdit).subscribe();
+  }
+
+  getCategory(id: string){
+    this.category = this.cService.getCategoryById(id)!;
   }
 }
