@@ -8,17 +8,17 @@ import { AnnouncementService } from './announcement.service';
 
 export class CategoryService {
 
-    categories!: Category[];
+  categories!: Category[];
 
-    constructor(private service: AnnouncementService) { 
-      this.service.getCategories().subscribe((val: Category[]) => this.categories = val);
-    }
+  constructor(private service: AnnouncementService) {
+    this.service.getCategories().subscribe((val: Category[]) => this.categories = val);
+  }
 
-    getCategoryById(id: string){
+  getCategoryById(id: string) {
       return this.categories.find(val => val.id === id);
-    }
+  }
 
-    getCategories(){
-      return this.categories;
-   }
+  getCategories() {
+    return this.categories;
+  }
 }

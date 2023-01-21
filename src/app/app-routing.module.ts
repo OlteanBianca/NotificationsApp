@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: "", component: HomeComponent, pathMatch:"full" },
   { path: 'add', component: AddAnnouncementComponent },
   { path: 'edit/:id', component: EditAnnouncementComponent },
+  { path: 'home', component: HomeComponent },
   { path: '**', redirectTo: '' },
 ];
 

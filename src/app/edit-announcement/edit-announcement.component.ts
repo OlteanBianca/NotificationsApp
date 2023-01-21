@@ -33,17 +33,22 @@ export class EditAnnouncementComponent implements OnInit {
 
     let id = this.route.snapshot.paramMap.get('id');
     if (id == null) return;
-
-    this.getCategory(id);
-    this.aService.getAnnouncementById(id).subscribe((value: Announcement) => { this.announcementToEdit = value });
+    
+    this.aService.getAnnouncementById(id).subscribe((value: Announcement) => { 
+      this.announcementToEdit = value 
+      this.getCategory(value.categoryId);
+    });
   }
 
   saveAnnouncement() {
-    this.announcementToEdit.categoryId = this.category.id;
+    if(this.category != null){
+      this.announcementToEdit.categoryId = this.category.id;
+    }
     this.aService.editAnnouncement(this.announcementToEdit).subscribe();
+    this.aService.getAnnouncements().subscribe();
   }
 
-  getCategory(id: string){
+  getCategory(id: string) {
     this.category = this.cService.getCategoryById(id)!;
   }
 }

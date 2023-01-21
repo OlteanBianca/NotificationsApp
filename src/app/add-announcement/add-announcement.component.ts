@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Announcement } from '../announcement';
 import { Category } from '../category';
 import { AnnouncementService } from '../services/announcement.service';
@@ -30,7 +31,8 @@ export class AddAnnouncementComponent implements OnInit {
 
   constructor(private service: AnnouncementService, 
               private categoryService: CategoryService,
-              private notificationService: NotificationsService) {}
+              private notificationService: NotificationsService,
+              private route: Router) {}
 
   ngOnInit(): void {
     this.categories  = this.categoryService.getCategories();
@@ -50,6 +52,9 @@ export class AddAnnouncementComponent implements OnInit {
       categoryId: this.newCategory.id,
     }
 
-    this.service.addAnnouncement(announcement).subscribe(r => this.notificationService.sendMessage("BroadcastMessage", [r]));
+    this.service.addAnnouncement(announcement).subscribe(
+      r => {
+        this.notificationService.sendMessage("BroadcastMessage", [r]);
+      this.route.navigateByUrl('')} );
   }
 }

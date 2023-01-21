@@ -28,8 +28,9 @@ export class NotificationsService {
       this.notificationSubject.next(true);
     });
 
-    this.connection.start().then(() => {
-      // Here we can configure what to do upon starting the connection
+    this.connection.start().then( result => { 
+      console.log("SignalR is now connected")
+    }).catch(function (e) {
     });
   }
 
